@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Profile;
 use Illuminate\Http\Request;
+use DB;
 
 class ProfileController extends Controller
 {
@@ -65,9 +66,9 @@ class ProfileController extends Controller
      * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function show(Profile $profile)
+    public function show($id)
     {
-        //
+        echo '120';
     }
 
     /**
@@ -76,9 +77,8 @@ class ProfileController extends Controller
      * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function edit(Profile $profile)
+    public function edit($id)
     {
-
     }
 
     /**
@@ -113,11 +113,14 @@ class ProfileController extends Controller
      * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Profile $profile)
+    public function destroy($id)
     {
-        $deleted = DB::table('profiles')->delete();
- 
-        $deleted = DB::table('profiles')->where('id', $id)->delete();
+        try {
+            DB::delete('DELETE FROM profiles WHERE profileID = ?',[$id]);
+            echo 'work';
+        } catch (\Throwable $th) {
+            throw $th;
+        }
 
     }
 }

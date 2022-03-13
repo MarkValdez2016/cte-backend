@@ -93,7 +93,7 @@ class AnnouncementTypeController extends Controller
      * @param  \App\Models\AnnouncementType  $announcementType
      * @return \Illuminate\Http\Response
      */
-    public function click_delete($id )
+    public function destroy($id )
 
     {
         DB::delete('delete users where profile = ?', [$id]);

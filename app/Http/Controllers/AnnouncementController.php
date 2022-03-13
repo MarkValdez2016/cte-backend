@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Announcement;
 use Illuminate\Http\Request;
+use DB;
 
 class AnnouncementController extends Controller
 {
@@ -100,11 +101,13 @@ class AnnouncementController extends Controller
      * @param  \App\Models\Announcement  $announcement
      * @return \Illuminate\Http\Response
      */
-    public function delete( $id)
+    public function destroy($id)
     {
-        // $announcement->delete();
-
-        // return redirect()->route('posts.index')
-        //      ->withSuccess(__('Post delete successfully.'));
+        try {
+            DB::delete('DELETE FROM announcements WHERE announcementID = ?',[$id]);
+            echo 'work';
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }
