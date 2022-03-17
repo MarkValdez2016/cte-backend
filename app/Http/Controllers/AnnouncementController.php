@@ -52,7 +52,6 @@ class AnnouncementController extends Controller
             $announcement->updated_at                   = now();
     
             $announcement->save();
-            // return back();
             echo 'Done';
 
         } catch (\Throwable $th) {
@@ -67,9 +66,10 @@ class AnnouncementController extends Controller
      * @param  \App\Models\Announcement  $announcement
      * @return \Illuminate\Http\Response
      */
-    public function show(Announcement $announcement)
+    public function show($id)
     {
-        //
+        $announcementsData = Announcement::find($id);
+        return $announcementsData;
     }
 
     /**
@@ -90,9 +90,26 @@ class AnnouncementController extends Controller
      * @param  \App\Models\Announcement  $announcement
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Announcement $announcement)
+    public function update(Request $request, $id)
     {
         //
+
+        try {
+
+            $announcementTitle           = $request->input('announcementTitle');
+            $announcementDetails         = $request->input('announcementDetails');
+            $announcementImage           = $request->input('announcementImage');
+            $announcementMemo            = $request->input('announcementMemo');
+            $announcementDescription     = $request->input('announcementDescription');
+
+            DB::update('UPDATE announcements SET announcementTitle =?, announcementDetails =?, announcementImage =?, announcementMemo =?, announcementDescription =? WHERE announcementID =?',
+            [$announcementTitle,$announcementDetails,$announcementImage,$announcementMemo,$announcementDescription,$id]);
+            echo 'Done';
+
+        } catch (\Throwable $th) {
+
+            throw $th;
+        }
     }
 
     /**

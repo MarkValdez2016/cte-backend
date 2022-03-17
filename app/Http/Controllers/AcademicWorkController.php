@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AcademicWork;
 use Illuminate\Http\Request;
+use DB;
 
 class AcademicWorkController extends Controller
 {
@@ -64,9 +65,10 @@ class AcademicWorkController extends Controller
      * @param  \App\Models\AcademicWork  $academicWork
      * @return \Illuminate\Http\Response
      */
-    public function show(AcademicWork $academicWork)
+    public function show($id)
     {
-        //
+        $academicWorkData = academicWork::find($id);
+        return $academicWorkData;
     }
 
     /**
@@ -77,7 +79,7 @@ class AcademicWorkController extends Controller
      */
     public function edit(AcademicWork $academicWork)
     {
-        //
+
     }
 
     /**
@@ -87,9 +89,24 @@ class AcademicWorkController extends Controller
      * @param  \App\Models\AcademicWork  $academicWork
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AcademicWork $academicWork)
+    public function update(Request $request, $id)
     {
-        //
+        try {
+
+            $academicTitle              = $request->input('academicTitle');
+            $academicDate               = $request->input('academicDate');
+            $academiclinkwork           = $request->input('academiclinkwork');
+
+            DB::update('UPDATE academic_works SET academicTitle =?, academicDate =?, academiclinkwork =? WHERE 
+            academicID =?' , [$academicTitle, $academicDate, $academiclinkwork, $id]);
+
+
+
+            
+            
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**

@@ -18,15 +18,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::get('/products',function()
-// {
-//     return 'products';
-// });
+// Route::post('teacheraccount/create', '\App\Http\Controllers\RegisterController@create');
+
 
 //profile 
 Route::resource('profile', '\App\Http\Controllers\ProfileController');
 
-Route::delete('profile/{id}','ProfileController@destroy');
+Route::post('profile/update/{id}','\App\Http\Controllers\ProfileController@update');
+
+Route::delete('profile/destroy/{id}','ProfileController@destroy');
+
+Route::get('profile/show/{id}','\App\Http\Controllers\ProfileController@show');
+
+Route::get('profiledata/show','\App\Http\Controllers\ProfileController@viewRecord');
+
 
 //Announcement
 
@@ -34,12 +39,19 @@ Route::resource('announcement_type','\App\Http\Controllers\AnnouncementTypeContr
 
 Route::resource('announcements','\App\Http\Controllers\AnnouncementController');
 
-Route::delete('announcements/{id}','AnnouncementController@destroy');
+Route::delete('announcements/destroy/{id}','AnnouncementController@destroy');   
+
+Route::post('announcements/update/{id}','\App\Http\Controllers\AnnouncementController@update');
+
+Route::get('announcements/show/{id}','\App\Http\Controllers\AnnouncementController@show');
+
+
 
 //AcademicWorks
 
 Route::resource('academicWork', '\App\Http\Controllers\AcademicWorkController');
 
+Route::post('academicwork/update/{id}', '\App\Http\Controllers\AcademicWorkController@update');
 
+Route::get('academicwork/show/{id}','\App\Http\Controllers\AcademicWorkController@show');
 
-// Route::delete('delete_profile/{id}',[ProfileController::class, 'delete']);
