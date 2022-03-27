@@ -14,8 +14,7 @@ class Announcement extends Model
     protected $primaryKey = 'announcementID';
 
     protected $filltable = [
-        'announcementTypeID','announcementTitle','announcementDetails','announcementImage','announcementMemo',
-        'announcementDescription',
+        'announcementType','announcementDetails','announcementImage',
     ];
 
     protected $timestamp = TRUE;

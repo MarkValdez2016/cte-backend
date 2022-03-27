@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAnnouncementsTable extends Migration
+class CreateTableSeminar extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateAnnouncementsTable extends Migration
      */
     public function up()
     {
-        Schema::create('announcements', function (Blueprint $table) {
-            $table->increments('announcementID');
-            $table->string('announcementType');  // Foreign Key
-            $table->string('announcementDetails');
-            $table->string('announcementImage');
+        Schema::create('seminars', function (Blueprint $table) {
+            $table->id('SeminarID');
+            $table->string('seminarTitle');
+            $table->string('seminarLocation');
+            $table->date('seminarDate');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateAnnouncementsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('announcements');
+        Schema::dropIfExists('seminars');
     }
 }

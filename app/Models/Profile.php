@@ -14,8 +14,8 @@ class Profile extends Model
     protected $primaryKey = 'ProfileID';
 
     protected $filltable = [
-        'profileLname','profileFname','profileMname','profileGender','profileBirthDate',
-        'profilePicture', 'profileDegree',  'profileDepartment', 'profileDateEmployed',
+        'profileLname','profileFname','profileMname','profileGender', 'profileAddress', 'profileBirthDate',
+        'profilePicture', 'profileDegree',  'profileDepartment', 'profileDateEmployed', 'profileReligion', 'profileCivilStatus','profilePosition', 'profilePublishWork',
     ];
 
     protected $timestamp = TRUE;

@@ -40,19 +40,15 @@ class AnnouncementController extends Controller
         try {
             $announcement = new Announcement;
 
-            $announcement->announcementTypeID       = $request->announcementTypeID;
-            $announcement->announcementTitle        = $request->announcementTitle;
+            $announcement->announcementType         = $request->announcementType;
             $announcement->announcementDetails      = $request->announcementDetails;
             $announcement->announcementImage        = $request->announcementImage;
-            $announcement->announcementMemo         = $request->announcementMemo;
-            $announcement->announcementDescription  = $request->announcementDescription;
-
-    
+      
             $announcement->created_at                   = now();
             $announcement->updated_at                   = now();
     
             $announcement->save();
-            echo 'Done';
+            echo 'Done'; /* ALERT SA JS */
 
         } catch (\Throwable $th) {
             throw $th;
@@ -66,12 +62,14 @@ class AnnouncementController extends Controller
      * @param  \App\Models\Announcement  $announcement
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        $announcementsData = Announcement::find($id);
-        return $announcementsData;
-    }
+        
+        $data = Announcement::all();
+        return $data;           
 
+        
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -96,14 +94,11 @@ class AnnouncementController extends Controller
 
         try {
 
-            $announcementTitle           = $request->input('announcementTitle');
             $announcementDetails         = $request->input('announcementDetails');
             $announcementImage           = $request->input('announcementImage');
-            $announcementMemo            = $request->input('announcementMemo');
-            $announcementDescription     = $request->input('announcementDescription');
-
-            DB::update('UPDATE announcements SET announcementTitle =?, announcementDetails =?, announcementImage =?, announcementMemo =?, announcementDescription =? WHERE announcementID =?',
-            [$announcementTitle,$announcementDetails,$announcementImage,$announcementMemo,$announcementDescription,$id]);
+        
+            DB::update('UPDATE announcements SET announcementDetails =?, announcementImage =? WHERE announcementID =?',
+            [$announcementDetails,$announcementImage,$id]);
             echo 'Done';
 
         } catch (\Throwable $th) {

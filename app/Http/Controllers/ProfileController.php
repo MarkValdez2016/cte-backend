@@ -43,14 +43,20 @@ class ProfileController extends Controller
             $profile->profileFname                = request('profileMname');
             $profile->profileMname                = request('profileFname');
             $profile->profileGender               = request('profileGender');
+            $profile->profileAddress              = request('profileAddress');
             $profile->profileBirthDate            = request('profileBirthDate');
             $profile->profilePicture              = request('profilePicture');
             $profile->profileDegree               = request('profileDegree');
             $profile->profileDepartment           = request('profileDepartment');
             $profile->profileDateEmployed         = request('profileDateEmployed');
+            $profile->profileReligion             = request('profileReligion');
+            $profile->profileCivilStatus          = request('profileCivilStatus');
+            $profile->profilePosition             = request('profilePosition');
+            
+            
     
-            $profile->created_at                    = now();
-            $profile->updated_at                    = now();
+            $profile->created_at                  = now();
+            $profile->updated_at                  = now();
     
             $profile->save();
             return 'DONE';
@@ -68,8 +74,11 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        $profilesData = Profile::find($id);
+        $profilesData = Profile::all($id);
         return $profilesData;
+
+        // $profileData = Profile::all();
+        //     return $profileData;
     }
 
     /**
@@ -98,14 +107,18 @@ class ProfileController extends Controller
             $profileFname           = $request->input('profileMname');
             $profileMname           = $request->input('profileFname');
             $profileGender          = $request->input('profileGender');
+            $profileAddress         = $request->input('profileAddress');
             $profileBirthDate       = $request->input('profileBirthDate');
             $profilePicture         = $request->input('profilePicture');
             $profileDegree          = $request->input('profileDegree');
             $profileDepartment      = $request->input('profileDepartment');
             $profileDateEmployed    = $request->input('profileDateEmployed');
+            $profileReligion        = $request->input('profileReligion');
+            $profileCivilStatus     = $request->input('profileCivilStatus');
+            $profilePublishWork     = $request->input('profilePublishWork');
  
-             DB::update('UPDATE profiles SET profileLname=?, profileLname=?, profileMname=?, profileGender=?, profileBirthDate=?, profilePicture=?, profileDegree=?, profileDepartment=?, profileDateEmployed=? WHERE profileID = ?',
-             [$profileLname, $profileFname, $profileMname, $profileGender, $profileBirthDate, $profilePicture, $profileDegree, $profileDepartment, $profileDateEmployed, $id]);
+             DB::update('UPDATE profiles SET profileLname=?, profileFname=?, profileMname=?, profileGender=?, profileAddress=?, profileBirthDate=?, profilePicture=?, profileDegree=?, profileDepartment=?, profileDateEmployed=?, profileReligion=?, profileCivilStatus=?, profilePublishWork=? WHERE profileID = ?',
+             [$profileLname, $profileFname, $profileMname, $profileGender, $profileAddress, $profileBirthDate, $profilePicture, $profileDegree, $profileDepartment, $profileDateEmployed, $profileReligion, $profileCivilStatus, $profilePublishWork, $id]);
  
              Echo "Done";
 

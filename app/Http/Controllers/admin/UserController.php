@@ -24,7 +24,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //Insert USER ACC
+        
 
         
     }
@@ -37,30 +37,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //Insert Profile 
-        // $profile = new Profile;
-
-        // $profile->user_id                     = $user->id;
-        // $profile->profileLname                = request('profileLname');
-        // $profile->profileFname                = request('profileMname');
-        // $profile->profileMname                = request('profileFname');
-        // $profile->profileAddress              = request('profileAddress');
-        // $profile->profileGender               = request('profileGender');
-        // $profile->profileBirthdate            = request('profileBirthdate');
-        // $profile->profilePicture              = request('profilePicture');
-        // $profile->profileDegree               = request('profileDegree');
-        // $profile->profileDepartment           = request('profileDepartment');
-        // $profile->profileDateEmployed         = request('profileDateEmployed');
-
-        // $profile->create_at                   = now();
-        // $profile->updated_at                  = now();
-
-        // $profile->save();
-
-        // $profile = Profile:: select('profiles')->where('profileID', $profile->profileID)->first();
-        // $user->profile()->attach($prof);
-
-        // return $user;
+        try {
+            $this->validate(request(), [
+                'name' => 'required',
+                'email' => 'required|email',
+                'password' => 'required'
+            ]);
+            
+            $userAccount = User::create(request(['name', 'email', 'password']));
+            
+            auth()->login($userAccount);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     /**
@@ -105,6 +94,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        auth()->logout();
+        
+        echo 'Done';
     }
 }
