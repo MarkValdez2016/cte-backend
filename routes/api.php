@@ -18,13 +18,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('register/show', '\App\Http\Controllers\RegisterController');
-
-
-Route::get('products', function()
-{
-    return 'products';
-});
+Route::post('register', 'App\Http\Controllers\Auth\RegisterController@store');
 
 
 //profile 

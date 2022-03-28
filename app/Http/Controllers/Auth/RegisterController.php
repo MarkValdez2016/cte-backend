@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use App\Models\User;
+
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+
+use App\Models\User;
 
 
 class RegisterController extends Controller
@@ -73,6 +76,24 @@ class RegisterController extends Controller
 
         $user->save();
         return response()->json(['message' => 'User has been registered'], 200);
+    }
+
+    public function store(Request $request)
+    {
+        try {
+            $data = new User;
+
+            $data->name     = request('name');
+            $data->email    = request('email');
+            $data->password = Hash::make(request('password'));
+    
+            $data->save();
+            return 'DONE';
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+       
     }
 
    
