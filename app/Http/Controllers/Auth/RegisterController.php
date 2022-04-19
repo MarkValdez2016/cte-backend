@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 
 use App\Models\User;
 
+use DB;
+
 
 class RegisterController extends Controller
 {
@@ -94,6 +96,17 @@ class RegisterController extends Controller
             throw $th;
         }
        
+    }
+
+    public function destroy($id)
+    {
+        try {
+            DB::delete('DELETE FROM users WHERE id = ?',[$id]);
+            echo 'work';
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+
     }
 
    

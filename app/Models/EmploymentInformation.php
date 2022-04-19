@@ -5,24 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Profile extends Model
-{   
+class EmploymentInformation extends Model
+{
     use HasFactory;
+    
+    protected $table = 'employment_information';
 
-    protected $table = 'profiles';
-
-    protected $primaryKey = 'profileID';
+    protected $primaryKey = 'EmploymentID';
 
     protected $filltable = [
-        'profileLname','profileFname','profileMname', 'profileGender', 'profileCivilStatus', 'profileReligion', 'profileAddress', 'profileBirthDate',
-        'profilePicture', 'profileZipCode',
+        'EmploymentWmsuID','EmploymentDepartment','EmploymentCollegeTitle', 'EmploymentDate', 'EmploymentPRClicenseID', 
     ];
 
     protected $timestamp = TRUE;
 
     public function profile() 
     {
-        return $this->hasMany('App\Models\Profile');
+        return $this->hasMany('App\Models\EmploymentInformation');
     }
     
     public function users ()

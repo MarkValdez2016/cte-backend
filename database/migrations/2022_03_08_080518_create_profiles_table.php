@@ -18,17 +18,13 @@ class CreateProfilesTable extends Migration
             $table->string('profileLname');
             $table->string('profileFname');
             $table->string('profileMname');
+            $table->string('profileCivilStatus');
+            $table->string('profileReligion');
             $table->string('profileGender');
             $table->string('profileAddress');
             $table->date('profileBirthDate');
             $table->string('profilePicture');
-            $table->string('profileDegree');
-            $table->string('profileDepartment');
-            $table->string('profileDateEmployed');
-            $table->string('profileReligion');
-            $table->string('profileCivilStatus');
-            $table->string('profilePosition');
-            $table->string('profilePublishWork');
+            $table->string('profileZipCode');
             $table->timestamps();
         });
     }

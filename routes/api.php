@@ -12,13 +12,20 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
+
 */
 //Aunthentication 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//Register
+
 Route::post('register', 'App\Http\Controllers\Auth\RegisterController@store');
+
+Route::post('register/destroy/{id}', '\App\Http\Controllers\Auth\RegisterController@destroy');
+
+
 
 
 //profile 
@@ -31,6 +38,32 @@ Route::delete('profile/destroy/{id}','\App\Http\Controllers\ProfileController@de
 Route::get('profile/show/{id}','\App\Http\Controllers\ProfileController@show');
 
 Route::get('profiledata/show','\App\Http\Controllers\ProfileController@viewRecord');
+
+//Employment Information 
+
+Route::resource('employmentinformation', '\App\Http\Controllers\EmploymentInformationController');
+
+Route::post('employmentinformation/update/{id}','\App\Http\Controllers\EmploymentInformationController@update');
+
+Route::get('employmentinformation/show/{id}','\App\Http\Controllers\EmploymentInformationController@show');
+
+//Educational Background
+
+Route::resource('educationalbackground', '\App\Http\Controllers\EducationalBackgroundController');
+
+Route::post('educationalbackground/update/{id}','\App\Http\Controllers\EducationalBackgroundController@update');
+
+Route::delete('educationalbackground/destroy/{id}','\App\Http\Controllers\EducationalBackgroundController@destroy');
+
+Route::get('educationalbackground/show/{id}','\App\Http\Controllers\EducationalBackgroundController@show');
+
+//Analytics
+
+Route::get('analytics/show/all','\App\Http\Controllers\AnalyticsController@index');
+
+//Faculties
+
+// Route::get('faculties/show/all', 'App\Http\Controllers\FacultiesController@index');
 
 
 //Announcement
@@ -56,8 +89,9 @@ Route::post('academicwork/update/{id}', '\App\Http\Controllers\AcademicWorkContr
 
 Route::get('academicwork/show/{id}','\App\Http\Controllers\AcademicWorkController@show');
 
-//Seminar
+//Petition (Request)
 
-Route::resource('seminar', '\App\Http\Controllers\SeminarController');
+Route::resource('petitions', '\App\Http\Controllers\PetitionController');
 
-Route::post('seminar/update/{id}','\App\Http\Controllers\SeminarController@update');
+Route::get('petitions/show/{id}','\App\Http\Controllers\PetitionController@show');
+

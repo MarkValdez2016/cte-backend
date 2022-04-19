@@ -46,13 +46,10 @@ class ProfileController extends Controller
             $profile->profileAddress              = request('profileAddress');
             $profile->profileBirthDate            = request('profileBirthDate');
             $profile->profilePicture              = request('profilePicture');
-            $profile->profileDegree               = request('profileDegree');
-            $profile->profileDepartment           = request('profileDepartment');
-            $profile->profileDateEmployed         = request('profileDateEmployed');
             $profile->profileReligion             = request('profileReligion');
             $profile->profileCivilStatus          = request('profileCivilStatus');
-            $profile->profilePosition             = request('profilePosition');
-            
+            $profile->profileZipCode              = request('profileZipCode');
+
             
     
             $profile->created_at                  = now();
@@ -75,7 +72,7 @@ class ProfileController extends Controller
     public function show($id)
     {
         $profilesData = Profile::all($id);
-        return $profilesData;
+        return $profilesData; 
 
         // $profileData = Profile::all();
         //     return $profileData;
@@ -103,22 +100,19 @@ class ProfileController extends Controller
     {   
         try {
             
-            $profileLname           = $request->input('profileLname');
-            $profileFname           = $request->input('profileMname');
-            $profileMname           = $request->input('profileFname');
-            $profileGender          = $request->input('profileGender');
-            $profileAddress         = $request->input('profileAddress');
-            $profileBirthDate       = $request->input('profileBirthDate');
-            $profilePicture         = $request->input('profilePicture');
-            $profileDegree          = $request->input('profileDegree');
-            $profileDepartment      = $request->input('profileDepartment');
-            $profileDateEmployed    = $request->input('profileDateEmployed');
-            $profileReligion        = $request->input('profileReligion');
-            $profileCivilStatus     = $request->input('profileCivilStatus');
-            $profilePublishWork     = $request->input('profilePublishWork');
- 
-             DB::update('UPDATE profiles SET profileLname=?, profileFname=?, profileMname=?, profileGender=?, profileAddress=?, profileBirthDate=?, profilePicture=?, profileDegree=?, profileDepartment=?, profileDateEmployed=?, profileReligion=?, profileCivilStatus=?, profilePublishWork=? WHERE profileID = ?',
-             [$profileLname, $profileFname, $profileMname, $profileGender, $profileAddress, $profileBirthDate, $profilePicture, $profileDegree, $profileDepartment, $profileDateEmployed, $profileReligion, $profileCivilStatus, $profilePublishWork, $id]);
+            $profileLname                        = $request->input('profileLname');
+            $profileFname                        = $request->input('profileMname');
+            $profileMname                        = $request->input('profileFname');
+            $profileGender                       = $request->input('profileGender');
+            $profileAddress                      = $request->input('profileAddress');
+            $profileBirthDate                    = $request->input('profileBirthDate');
+            $profilePicture                      = $request->input('profilePicture');
+            $profileReligion                     = $request->input('profileReligion');
+            $profileCivilStatus                  = $request->input('profileCivilStatus');
+            $profileZipCode                      = $request->input('profileZipCode');
+            
+             DB::update('UPDATE profiles SET profileLname=?, profileFname=?, profileMname=?,  profileGender=?, profileAddress=?, profileBirthDate=?, profilePicture=?, profileReligion=?, profileCivilStatus=?, profileZipCode=? WHERE profileID = ?',
+             [$profileLname, $profileFname, $profileMname, $profileGender, $profileAddress, $profileBirthDate, $profilePicture, $profileReligion, $profileCivilStatus, $profileZipCode, $id]);
  
              Echo "Done";
 
@@ -147,45 +141,4 @@ class ProfileController extends Controller
     }
 
     //view Record 
-
-    public function viewRecord()
-    {
-        try {
-            
-            $degree1 = DB::table('profiles')
-                        ->where('profileDegree', 'Bachelor Degree')
-                        ->count();
-
-           $degree2  = DB::table('profiles')
-                        ->where('profileDegree', 'Master Degree')
-                        ->count();
-
-           $degree3  = DB::table('profiles')
-                        ->where('profileDegree', 'Doctorate Degree')
-                        ->count();
-
-                        
-           $department1 = DB::table('profiles')
-                        ->where('profileDepartment', 'Elementary Education')
-                        ->count();
-
-           $department2 = DB::table('profiles')
-                        ->where('profileDepartment', 'Secondary Education')
-                        ->count();
-
-           $department3 = DB::table('profiles')
-                        ->where('profileDepartment', 'Special Education')
-                        ->count();
-
-            echo $degree1 . ','. $degree2 .','. $degree3 .','. $department1 .','. $department2.','. $department3;
-
-        } catch (\Throwable $th) {
-            throw $th;
-            // echo 'error';
-
-           
-        }
-           
-
-    }
 }
